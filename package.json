@@ -482,6 +482,7 @@
     "ovsx": "^0.10.2"
   },
   "dependencies": {
-    "@vscode/python-extension": "^1.0.5"
+    "@vscode/python-extension": "^1.0.5",
+    "jsonc-parser": "^3.3.1"
   }
 }

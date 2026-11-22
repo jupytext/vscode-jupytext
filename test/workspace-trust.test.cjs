@@ -7,7 +7,7 @@ const vm = require("node:vm")
 const manifest = require("../package.json")
 
 // Load the compiled extension with only VS Code mocked; child processes are real.
-function loadExtension(isTrusted) {
+function loadExtension(isTrusted, vscodeOverrides = {}) {
   const vscode = {
     workspace: {
       isTrusted,
@@ -15,6 +15,7 @@ function loadExtension(isTrusted) {
         throw new Error("Untrusted discovery must not read configuration")
       },
     },
+    ...vscodeOverrides,
   }
   const cache = new Map()
   function load(filename) {
@@ -25,6 +26,7 @@ function loadExtension(isTrusted) {
     cache.set(filename, exports)
     vm.runInNewContext(readFileSync(filename, "utf8"), {
       exports,
+      Buffer,
       process,
       console,
       require(name) {
@@ -75,4 +77,43 @@ test("untrusted discovery and sync entry points return before reading configurat
   assert.equal(await jupytext.validatePythonAndJupytext(), undefined)
   assert.equal(await jupytext.ensurePythonAndJupytext(false), undefined)
   assert.equal(await jupytext.ensurePythonAndJupytext(true), undefined)
+})
+
+test("migration notices name ignored settings once without copying their values", async () => {
+  const files = new Map([
+    ["/one/.vscode/settings.json", `{
+      // The following setting is a comment, not an override:
+      // "jupytextSync.setFormatsArgs": [],
+      "jupytextSync.pythonExecutable": "/one/.venv/bin/python",
+    }`],
+    ["/project.code-workspace", `{
+      "settings": {"jupytextSync.syncArgs": ["--sync"], "jupytextSync.pythonExecutable": "python3"},
+    }`],
+  ])
+  const notices = []
+  const state = new Map()
+  const {load} = loadExtension(true, {
+    Uri: {parse: (value) => value, joinPath: (uri, ...segments) => path.posix.join(uri, ...segments)},
+    workspace: {
+      workspaceFile: "/project.code-workspace",
+      workspaceFolders: [{uri: "/one"}, {uri: "/two"}],
+      fs: {
+        async readFile(uri) {
+          const contents = files.get(uri)
+          if (contents === undefined) {
+            throw new Error("Settings file does not exist")
+          }
+          return Buffer.from(contents)
+        },
+      },
+    },
+    window: {async showWarningMessage(message) { notices.push(message) }},
+  })
+  const {warnAboutIgnoredWorkspaceSettings} = load(path.resolve(__dirname, "../out/settingsMigration.js"))
+  const workspaceState = {get: (key) => state.get(key), update: async (key, value) => state.set(key, value)}
+  await warnAboutIgnoredWorkspaceSettings(workspaceState)
+  await warnAboutIgnoredWorkspaceSettings(workspaceState)
+  assert.equal(notices.length, 1)
+  assert.match(notices[0], /jupytextSync\.pythonExecutable, jupytextSync\.syncArgs/)
+  assert.doesNotMatch(notices[0], /setFormatsArgs|\.venv|--sync/)
 })
