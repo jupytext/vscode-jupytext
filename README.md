@@ -78,6 +78,18 @@ This extension solves several common annoyances and provides handy features for 
 
 ### Extension Settings
 
+#### Workspace Trust and settings migration
+
+Python discovery, pairing and synchronization require a trusted workspace. Notebook cell editing remains available in Restricted Mode.
+
+The settings `jupytextSync.pythonExecutable`, `jupytextSync.setFormatsArgs` and `jupytextSync.syncArgs` control the executable and arguments used during automatic sync. Repository-controlled values could point to a malicious script or pass arguments that execute code when you save a file. Requiring User settings keeps this execution configuration under your control, even if a trusted repository later changes its settings.
+
+These settings apply at User or Remote User scope only. After an upgrade, Jupytext Sync shows a one-time notice in trusted workspaces that still contain any of these settings. Review the overrides in `.vscode/settings.json` or the `settings` section of your `.code-workspace` file.
+
+Open VS Code Settings and select **User**, or **Remote** when connected to a remote environment such as a dev container. Copy only the overrides you want to apply across projects in that environment. For a project-specific Python path, try automatic discovery first and use **Jupytext: Show Logs** to check which interpreter was selected. Remove the old workspace or folder entries once you have verified the new configuration.
+
+#### Settings reference
+
 You can configure the extension's behavior via VSCode settings (search for `jupytextSync` in the Settings UI or edit your `settings.json`):
 
 - **`jupytextSync.pythonExecutable`**:

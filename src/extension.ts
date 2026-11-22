@@ -1,5 +1,6 @@
 import * as vscode from "vscode"
 import {getJConsole, config, setConfig} from "./constants"
+import {warnAboutIgnoredWorkspaceSettings} from "./settingsMigration"
 import {
   pickJupytext,
   setJupytext,
@@ -93,6 +94,14 @@ export async function activate(context: vscode.ExtensionContext) {
 
   // Initial setup of handlers based on current configuration
   await updateEventHandlers(context)
+
+  if (vscode.workspace.isTrusted) {
+    await warnAboutIgnoredWorkspaceSettings(context.workspaceState)
+  } else {
+    context.subscriptions.push(
+      vscode.workspace.onDidGrantWorkspaceTrust(() => warnAboutIgnoredWorkspaceSettings(context.workspaceState)),
+    )
+  }
 }
 
 async function insertRawCodeCellBelowAndFocusContainer() {
