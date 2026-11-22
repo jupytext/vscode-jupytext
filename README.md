@@ -1,6 +1,6 @@
 # Jupytext Sync: Pair and Auto Sync Jupyter Notebooks via Jupytext in VSCode
 
-[![Screenshot](https://raw.githubusercontent.com/caenrigen/vscode-jupytext-sync/main/assets/screenshot.jpg)](https://raw.githubusercontent.com/caenrigen/vscode-jupytext-sync/main/assets/screenshot.jpg)
+[![Screenshot](https://raw.githubusercontent.com/jupytext/vscode-jupytext/main/assets/screenshot.jpg)](https://raw.githubusercontent.com/jupytext/vscode-jupytext/main/assets/screenshot.jpg)
 
 This extension integrates [`jupytext`](https://jupytext.readthedocs.io/en/latest/)'s pairing and synchronization capabilities into OSS Code like IDEs (VSCode, VSCodium, etc.), enabling automatic syncing between notebooks and their version-control-friendly text formats (`.py`, `.md`, etc.).
 
@@ -8,11 +8,11 @@ This extension integrates [`jupytext`](https://jupytext.readthedocs.io/en/latest
 
 ### Paired notebook with self-contained metadata
 
-[![Demo Notebook](https://raw.githubusercontent.com/caenrigen/vscode-jupytext-sync/main/assets/demo_notebook.gif)](https://raw.githubusercontent.com/caenrigen/vscode-jupytext-sync/main/assets/demo_notebook.gif)
+[![Demo Notebook](https://raw.githubusercontent.com/jupytext/vscode-jupytext/main/assets/demo_notebook.gif)](https://raw.githubusercontent.com/jupytext/vscode-jupytext/main/assets/demo_notebook.gif)
 
 ### Paired notebook via config file
 
-[![Demo Jupytext Config](https://raw.githubusercontent.com/caenrigen/vscode-jupytext-sync/main/assets/demo_config.gif)](https://raw.githubusercontent.com/caenrigen/vscode-jupytext-sync/main/assets/demo_config.gif)
+[![Demo Jupytext Config](https://raw.githubusercontent.com/jupytext/vscode-jupytext/main/assets/demo_config.gif)](https://raw.githubusercontent.com/jupytext/vscode-jupytext/main/assets/demo_config.gif)
 
 ## Installation
 

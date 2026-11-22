@@ -39,13 +39,13 @@
     "spin"
   ],
   "publisher": "caenrigen",
-  "homepage": "https://github.com/caenrigen/vscode-jupytext-sync",
+  "homepage": "https://github.com/jupytext/vscode-jupytext",
   "repository": {
     "type": "git",
-    "url": "https://github.com/caenrigen/vscode-jupytext-sync.git"
+    "url": "https://github.com/jupytext/vscode-jupytext.git"
   },
   "bugs": {
-    "url": "https://github.com/caenrigen/vscode-jupytext-sync/issues"
+    "url": "https://github.com/jupytext/vscode-jupytext/issues"
   },
   "icon": "icon.png",
   "activationEvents": [

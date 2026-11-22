@@ -672,7 +672,7 @@ export async function locatePythonAndJupytext() {
       "Click 'Open Settings' and specify the Python Executable. " +
       "There you will find more detailed instructions and tips. " +
       "If you still have issues, click 'Show Logs' for more information or " +
-      "create an issue on [GitHub](https://github.com/caenrigen/vscode-jupytext-sync/issues)."
+      "create an issue on [GitHub](https://github.com/jupytext/vscode-jupytext/issues)."
     const selection = await vscode.window.showWarningMessage(messageSettings, "Open Settings", "Show Logs")
     if (selection === "Open Settings") {
       // no need to await

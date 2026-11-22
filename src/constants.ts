@@ -1,6 +1,6 @@
 import * as vscode from "vscode"
 
-// Disabled for now. See https://github.com/caenrigen/vscode-jupytext-sync/issues/20
+// Disabled for now. See https://github.com/jupytext/vscode-jupytext/issues/20
 // export const defaultNotebookDir = ".jupytext-sync-ipynb"
 export const defaultNotebookDir = ""
 
