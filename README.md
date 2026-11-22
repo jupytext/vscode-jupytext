@@ -195,7 +195,10 @@ Marc [endorsed](https://jupytext.readthedocs.io/en/latest/vs-code.html) Jupytext
 
 ## Acknowledgements
 
-This extension was inspired by and builds upon the ideas from the following projects:
+This extension was originally started by Victor Negîrneac ([@caenrigen](https://github.com/caenrigen)).
+On November 22nd, 2026, the project was transferred to the [Jupytext Org](https://github.com/jupytext).
+
+It was originally inspired by the following projects:
 
 - [marius311/jupytext-paired-vscode](https://github.com/marius311/jupytext-paired-vscode)
 - [parmentelat/vscode-jupytext](https://github.com/parmentelat/vscode-jupytext)
